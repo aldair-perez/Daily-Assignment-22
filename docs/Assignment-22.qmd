@@ -1,0 +1,26 @@
+---
+title: "Assignment-22"
+author:
+- name: "Aldair Perez Marmolejo"
+email: "alpema@colostate.edu"
+format: html
+execute: 
+  echo: true
+---
+
+```{r}
+library(dataRetrieval)
+library()
+```
+
+```{r}
+poudre_flow <- readNWISdv(siteNumber = "06752260",
+                          parameterCd = "00060",
+                          startDate = "2013-01-01",
+                          endDate = "2023-12-31") |>
+  renameNWISColumns() |>
+  mutate(Date = yearmonth(Date)) |>
+  group_by(Date) |>
+  summarise(Flow = mean(Flow))
+```
+
